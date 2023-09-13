@@ -3,8 +3,17 @@ Esse repositório guarda meu material de estudo para a disciplina de Teoria dos 
 # Grafos
 Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o segundo conjunto são pares de vértices (arestas) que pertencem ao primeiro conjunto.
 
+## Formas de representação
+Existem duas formas: matriz de adjacência (listar no formato de linha coluna todos os vértices) e lista de adjacências. É preciso "mapear" o grafo para saber seus vértices e arestas.
+
+**OBS**: Não é pq um vértice não está conectado a outro vértice que ele não pertence ao grafo. Se faz parte do conjunto, faz parte do grafo.
 ## Lista de adjacências
-A lista de adjacência de um grafo tem uma lista encadeada associada a cada vértice do grafo. A lista de adjacência de um vértice v contém todos os vizinhos dele. 
+A lista de adjacência é implementada usando uma lista encadeada, onde cada nó da lista (registro) representa um vértice adjacente. Isso permite uma representação eficiente de grafos, especialmente quando se trata de grafos esparsos, onde nem todos os vértices estão conectados entre si.
+
+## Classificação
+Existe uma classificação de grafos que separa grafos direcionais e grafos não-direcionais:
+- Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando)
+- Grafos direcionais: as arestas possuem direção
 
 ## Estruturas do código
 Utiliza-se aqui três estruturas para compor o grafo, conforme o código abaixo.
@@ -31,6 +40,7 @@ A imagem abaixo organiza as estruturas das quais precisaremos. Cada uma delas te
 
 Para entender melhor como funciona, vamos seguir os seguintes passos:
 1. Criamos os vértices A, B e C
+
 ![Imagem de três vértices A, B e C sem nenhum conteúdo ainda neles.](./imagens/img_02.png)
 
 2. Inicializamos o campo visitado dos vértices
@@ -60,3 +70,57 @@ agora inclui seu vizinho (2), ou seja, aponta para alguém (2)
 ![Mesma imagem anterior, porém tudo é englobado por um retângulo laranja, com o texto "A" ao lado.](./imagens/img_10.png)
 
 É assim que a estrutura de um vértice funciona nesse algoritmo. Dá pra entender que todas essas coisas estão conectadas. A lista não precisa guardar todos os vértices dentro dela porque o próprio vértice já tem em si a informação de pra quem ele vai apontar. Logo, sabendo o início da lista (de qual elemento se trata) e a quantidade de vértices vizinhos, conseguimos ter o controle de, posteriormente, percorrer essa lista de adjacências de um vértice.
+
+## Algumas funções iniciais para desenvolver o grafo
+
+Arquivo de referência para ver tudo funcionando: 01_introducao.c
+
+Aqui vamos desenvolver:
+- `inicializarLista();`
+- `inicializarRegistro();`
+Essas funções o nome já diz tudo. Elas alocam memória para que essas estruturas sejam inicializadas, para isso usamos o [calloc()](https://pt.stackoverflow.com/questions/179205/qual-%C3%A9-a-diferen%C3%A7a-entre-calloc-e-malloc).
+
+- `addNaLista();`
+- `imprimirLista();`
+Essas funções servem para adicionar um novo registro numa lista e imprimir uma lista específica.
+
+- `push();`
+**Aqui a gente tá falando da elite**: serve para adicionar um registro na lista de adjacência de um vértice específico
+
+- `imprimirGrafo();`
+Imprime cada um dos vértices e suas listas de adjacências.
+
+No arquivo de referência é muito importante notar a linha 88. Segue a `main` pra mostrar aqui:
+
+```c
+int main() {
+    int qtd_vertices_grafo;
+    int qtd_arestas_grafo;
+    int a, b;
+
+    printf("Digite a quantidade de vértices do grafo\n");
+    scanf("%d", &qtd_vertices_grafo);
+    vertice *vertices = (vertice*)calloc(10000, sizeof(vertice));
+
+    printf("Digite a quantidade de arestas do grafo\n");
+    scanf("%d", &qtd_arestas_grafo);
+
+    printf("Digite as arestas do grafo:\n");
+    for(int i = 0; i < qtd_arestas_grafo; i++) {
+        scanf("%d %d", &a, &b);
+        push(&vertices[a], b);
+        push(&vertices[b], a);
+    }
+
+    printf("Hora da verdade:\n");
+    imprimirGrafo(qtd_vertices_grafo, vertices);
+
+    return 0;
+}
+```
+Isso daqui `vertice *vertices = (vertice*)calloc(10000, sizeof(vertice));` é muito importante, porque vai garantir que a gente possa alocar um vetor de vértices e depois possa acessá-los, o que é basicamente a estrutura do grafo. 
+
+A nossa função `push()` vai fazer todo o trabalho de basicamente adicionar uma nova aresta no grafo.
+
+## Referências
+[SOpt](https://github.com/maniero/SOpt/tree/master/C)
