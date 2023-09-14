@@ -43,7 +43,7 @@ Para entender melhor como funciona, vamos seguir os seguintes passos:
 
 ![Imagem de três vértices A, B e C sem nenhum conteúdo ainda neles.](./imagens/img_02.png)
 
-2. Inicializamos o campo visitado dos vértices
+2. Inicializamos o campo visitado dos vértices (esse campo será utilizado quando precisarmos fazer buscas no grafo)
 ![Imagem de cada um dos vértices com "A.visitado = 0", para cada um deles. Destaque para lembrar que a estrutura do vértice inclui um inteiro e uma struct de lista. Tudo está com a cor laranja.](./imagens/img_03.png)
 
 
@@ -78,16 +78,20 @@ Arquivo de referência para ver tudo funcionando: 01_introducao.c
 Aqui vamos desenvolver:
 - `inicializarLista();`
 - `inicializarRegistro();`
+
 Essas funções o nome já diz tudo. Elas alocam memória para que essas estruturas sejam inicializadas, para isso usamos o [calloc()](https://pt.stackoverflow.com/questions/179205/qual-%C3%A9-a-diferen%C3%A7a-entre-calloc-e-malloc).
 
 - `addNaLista();`
 - `imprimirLista();`
+
 Essas funções servem para adicionar um novo registro numa lista e imprimir uma lista específica.
 
 - `push();`
+
 **Aqui a gente tá falando da elite**: serve para adicionar um registro na lista de adjacência de um vértice específico
 
 - `imprimirGrafo();`
+
 Imprime cada um dos vértices e suas listas de adjacências.
 
 No arquivo de referência é muito importante notar a linha 88. Segue a `main` pra mostrar aqui:
@@ -120,7 +124,65 @@ int main() {
 ```
 Isso daqui `vertice *vertices = (vertice*)calloc(10000, sizeof(vertice));` é muito importante, porque vai garantir que a gente possa alocar um vetor de vértices e depois possa acessá-los, o que é basicamente a estrutura do grafo. 
 
-A nossa função `push()` vai fazer todo o trabalho de basicamente adicionar uma nova aresta no grafo.
+A nossa função `push()` vai fazer todo o trabalho de adicionar uma nova aresta no grafo.
+
+## DFS - Depth First Search (Busca em Profundidade)
+Um algoritmo de busca é qualquer algoritmo que visita todos os vértices de um grafo andando pelas arestas de um vértice a outro. [Cada algoritmo de busca é caracterizado pela ordem em que visita os vértices](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html). Nesse tópico vamos tratar do DFS ou Busca em Profundidade.
+
+O objetivo é visitar todos os vértices de um grafo e conseguir entender a estrutura do grafo com o qual estamos lidando, revelando sua "forma" e reunindo informações (representadas pela numeração dos vértices) que ajudam a responder perguntas sobre o grafo. Você escolhe um caminho e vai nesse caminho até não conseguir mais, descendo pelos nós do grafo, primeiro pela direita. Quando não houver mais nós para visitar, volta pro último lugar onde você tinha uma opção ainda não visitada.
+
+A ordem utilizada para visitar os vértices do grafo é a pré-ordem.
+![Imagem explicando a pré-ordem, onde a busca começa na raiz ou nó inicial, desce e visita toda a subárvore da direita e depois toda a subárvore da esquerda.](./imagens/img_11.png)
+
+A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai lendo os elementos a partir da lista de adjacência e colocando-os em um vetor de "visitados" à medida em que vai colocando e tirando os elementos da pilha de recursividade. Fica mais simples de entender com o passo a passo abaixo.
+
+1. Começamos com o grafo e a lista de adjacência dos vértices dele.
+![](./imagens/img_12.png)
+
+2. Devemos então começar pelo nó **1**. Verificamos no vetor de visitados que ele ainda não foi visitado. *OBS*: Note que aqui o nosso vetor de visitados vai de 0 a 7 então para facilitar a vida vamos usar no índice o mesmo número contido no vértice.
+![](./imagens/img_13.png)
+
+3. Se ele não foi visitado, indicamos que passamos por esse vértice e isso acontece quando atualizamos o vetor de visitados na posição **1**.
+![](./imagens/img_14.png)
+
+4. Em seguida, devemos adicionar o **1** na pilha de recursividade.
+![](./imagens/img_15.png)
+
+5. Como já visitamos o **1** e o adicionamos na pilha, vamos ao próximo vértice ao qual ele se conecta. Pela lista de adjacência podemos ver que se trata do vértice **2**.
+![](./imagens/img_16.png)
+
+6. Verificamos se o **2** já foi visitado através do vetor de visitados. 
+![](./imagens/img_17.png)
+
+7. Como ele ainda não foi visitado, atualizamos o vetor para indicar que ele foi visitado.. 
+![](./imagens/img_18.png)
+
+8. Em seguida, adicionamos o **2** na pilha de recursividade.
+![](./imagens/img_19.png)
+
+9. Com tudo do vértice **2** feito (checar se é visitado, adicionar na pilha de recursividade), vamos para o próximo vértice da lista de adjacência. Mas note: aqui, estamos no vértice **2**, logo, vamos visitar a lista de adjacência dele. Ajuda nesse ponto olhar para a pilha de recursividade e ver quem está no topo - é desse vértice que devemos tratar.
+![](./imagens/img_20.png)
+
+10. O primeiro vértice da lista de adjacência de **2** é o vértice **1**. Devemos conferir se ele foi visitado e, nesse caso, ele já foi.
+![](./imagens/img_21.png)
+
+11. Então, vamos para o próximo vértice da lista, que é o vértice **4**. Mesma coisa: conferimos se ele foi visitado.
+![](./imagens/img_22.png)
+
+12. **4** não foi visitados? Atualizamos o vetor para indicar que o visitamos. Também o colocamos na pilha de recursividade.
+![](./imagens/img_23.png)
+
+13. Estamos no vértice **4**, então vamos para a lista de adjacências dele.
+![](./imagens/img_24.png)
+
+14. Mesmo processo que já fizemos antes: quem está na lista dele? O vértice **2**. Verificamos se ele já foi visitado.
+![](./imagens/img_25.png)
+
+15. Aqui as coisas vão mudar. Encontramos que o vértice **2** já foi visitado no nosso grafo, então devemos seguir para o próximo vértice da lista de adjacências de **4**... porém não tem mais elementos nessa lista. Pela imagem, sabemos que **4** só tem uma aresta, ou seja, ele só se liga ao **2**. Como terminamos de mapear a lista de **4**, retiramos esse vértice da pilha de adjacência.
+![](./imagens/img_26.png)
+
 
 ## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
+[Busca em profundidade - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html)
+[Imagem usada para ilustrar pré-ordem](https://pythonhelp.wordpress.com/2015/01/19/arvore-binaria-de-busca-em-python/)
