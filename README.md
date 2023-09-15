@@ -181,5 +181,7 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 
 ## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
+
 [Busca em profundidade - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html)
+
 [Imagem usada para ilustrar pré-ordem](https://pythonhelp.wordpress.com/2015/01/19/arvore-binaria-de-busca-em-python/)
