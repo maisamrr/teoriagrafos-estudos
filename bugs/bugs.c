@@ -91,14 +91,15 @@ int main() {
     //cada linha a seguir eh uma aresta com os bugs
 
     int qtd_cenarios; //grafos
+    int qtd_bugs; //vertices
+    int qtd_interacoes; //arestas
+    
     printf("Input:\n");
     scanf("%d", &qtd_cenarios);
-    
-    //pegar infos de um cenario
-    for(int cenario = 1; cenario < qtd_cenarios; cenario++) {
-        int qtd_bugs; //vertices
-        int qtd_interacoes; //arestas
 
+    int *resultados = (int*)calloc(qtd_cenarios + 1, sizeof(int));
+    
+    for(int cenario = 1; cenario <= qtd_cenarios; cenario++) {
         scanf("%d %d", &qtd_bugs, &qtd_interacoes);
         vertice *vertices = (vertice*)calloc(qtd_bugs + 1, sizeof(vertice));
 
@@ -115,19 +116,24 @@ int main() {
             if(vertices[k].visitado == 0) {
                 if(!dfs(vertices, k, 1)) {
                     achou = 1;
-                    break;
                 }
             }
         }
+        resultados[cenario] = achou;
 
+        free(vertices);
+    }
+
+    for (int cenario = 1; cenario <= qtd_cenarios; cenario++) {
         printf("Scenario #%d:\n", cenario);
-        if(achou == 1) {
+        if (resultados[cenario] == 1) {
             printf("Suspicious bugs found!\n");
         } else {
             printf("No suspicious bugs found!\n");
         }
-        free(vertices);
     }
+    
+    free(resultados);
     
     return 0;
 }
