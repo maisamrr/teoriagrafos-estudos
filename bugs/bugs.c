@@ -83,12 +83,6 @@ int dfs(vertice *v, int no_raiz, int cor) {
 }
 
 int main() {
-    //bugs com generos diferentes = grafo bipartido
-
-    //input
-    //linha = qtd cenarios
-    // cada cenario (linha) = [numero de bugs (1 a 2000)] [numero de interacoes (1 milhao)]
-    //cada linha a seguir eh uma aresta com os bugs
 
     int qtd_cenarios; //grafos
     int qtd_bugs; //vertices
