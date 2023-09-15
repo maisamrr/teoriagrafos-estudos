@@ -131,9 +131,6 @@ Um algoritmo de busca é qualquer algoritmo que visita todos os vértices de um 
 
 O objetivo é visitar todos os vértices de um grafo e conseguir entender a estrutura do grafo com o qual estamos lidando, revelando sua "forma" e reunindo informações (representadas pela numeração dos vértices) que ajudam a responder perguntas sobre o grafo. Você escolhe um caminho e vai nesse caminho até não conseguir mais, descendo pelos nós do grafo, primeiro pela direita. Quando não houver mais nós para visitar, volta pro último lugar onde você tinha uma opção ainda não visitada.
 
-A ordem utilizada para visitar os vértices do grafo é a pré-ordem.
-![Imagem explicando a pré-ordem, onde a busca começa na raiz ou nó inicial, desce e visita toda a subárvore da direita e depois toda a subárvore da esquerda.](./imagens/img_11.png)
-
 A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai lendo os elementos a partir da lista de adjacência e colocando-os em um vetor de "visitados" à medida em que vai colocando e tirando os elementos da pilha de recursividade. Fica mais simples de entender com o passo a passo abaixo.
 
 1. Começamos com o grafo e a lista de adjacência dos vértices dele.

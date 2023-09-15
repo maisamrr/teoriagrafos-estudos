@@ -77,6 +77,26 @@ void imprimirGrafo(int qtd_vertices_grafo, vertice *v) {
     }
 }
 
+//aqui, devemos passar o vetor de vértices e o nó raiz por onde queremos iniciar a busca
+void dfs(vertice *v, int no_raiz) {
+    registro *aux;
+    v[no_raiz].visitado = 1; //dizendo a raiz foi visitada
+    printf(" %d", no_raiz); // vamos dar um confere na hora de chamar essa função
+
+    if(v[no_raiz].lista_adjacencia == NULL) { //se não houver nada na lista de adjacência da raiz, acaba por aí
+        return;
+    }
+
+    aux = v[no_raiz].lista_adjacencia->inicio; // indicando que a lista de adjacência começa no no raiz, ou seja, ele é o início dessa lista
+
+    while(aux != NULL) { //a partir desse nó aux, que aponta para o início,
+        if(v[aux->valor].visitado == 0) { //se ele ainda não foi visitado,
+            dfs(v, aux->valor); //chama o dfs recursivamente para visitar o nó
+        }
+        aux = aux->proximo; // e aponta para o próximo nó
+    }
+}
+
 int main() {
     int qtd_vertices_grafo;
     int qtd_arestas_grafo;
@@ -96,8 +116,11 @@ int main() {
         push(&vertices[b], a);
     }
 
-    printf("Hora da verdade:\n");
-    imprimirGrafo(qtd_vertices_grafo, vertices);
+    // printf("Hora da verdade:\n");
+    // imprimirGrafo(qtd_vertices_grafo, vertices);
+
+    printf("DFS em ação:\n");
+    dfs(vertices, 1);
 
     return 0;
 }
