@@ -60,14 +60,14 @@ int dfs(vertice *v, int no_raiz, int cor) {
     v[no_raiz].visitado = 1;
     v[no_raiz].cor = cor;
 
-    if(v[no_raiz].lista_adjacencia == NULL) { //se não tiver arestas
-        return 0; //acabou
+    if(v[no_raiz].lista_adjacencia == NULL) {
+        return 0;
     }
 
-    aux = v[no_raiz].lista_adjacencia->inicio; //inicializa aux para apontar para o início da lista de adjacência da raiz
+    aux = v[no_raiz].lista_adjacencia->inicio; 
 
-    while(aux != NULL) { //loop para percorrer a lista de adjacência da raiz
-        if(v[aux->valor].visitado == 0) { //se não foi visitado
+    while(aux != NULL) {
+        if(v[aux->valor].visitado == 0) {
             if (!dfs(v, aux->valor, v[no_raiz].cor*-1)) {  
                 return 0;
             };
@@ -76,7 +76,7 @@ int dfs(vertice *v, int no_raiz, int cor) {
                 return 0;
             }
         }
-        aux = aux->proximo; //vai pro próximo vértice adjacente
+        aux = aux->proximo; 
     }
 
     return 1;
@@ -84,9 +84,9 @@ int dfs(vertice *v, int no_raiz, int cor) {
 
 int main() {
 
-    int qtd_cenarios; //grafos
-    int qtd_bugs; //vertices
-    int qtd_interacoes; //arestas
+    int qtd_cenarios;
+    int qtd_bugs;
+    int qtd_interacoes;
     
     printf("Input:\n");
     scanf("%d", &qtd_cenarios);
@@ -98,7 +98,6 @@ int main() {
         vertice *vertices = (vertice*)calloc(qtd_bugs + 1, sizeof(vertice));
 
         int a, b;
-        //pegar arestas e colocar os vertices delas no grafo 
         for (int j = 0; j < qtd_interacoes; j++) {
             scanf("%d %d", &a, &b);
             push(&vertices[a], b);
