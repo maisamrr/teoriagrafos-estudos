@@ -99,27 +99,61 @@ int removerDaFila(fila *fila) {
     return removido;
 }
 
-int bfs (vertice *vertices, int raiz) {
+int bfs (vertice *vertices, int raiz, int qtd_vertices) {
     fila *minha_fila = iniciarFila();
     int atual;
     
+    for(int i = 0; i < qtd_vertices; i++ ) {
+        vertices[i].visitado = 0; //nenhum vertice visitado ainda
+        vertices[i].distancia_raiz = -1; 
+    }
+
+    vertices[raiz].distancia_raiz = 0; //distancia da raiz para ela mesma
+
     addNaFila(minha_fila, raiz);
-    while(minha_fila =! 0) {
-        atual = removerDaFila(minha_fila);
-        vertices[atual].visitado = 1;
+    while(minha_fila->tamanho != 0) {
+        atual = removerDaFila(minha_fila); //tira o primeiro da fila
+        vertices[atual].visitado = 1; //setar o atual como visitada
 
         //colocar todos os elementos da lista de adjacência do atual na fila       
         registro *aux;
-        aux = vertices[atual].lista_adjacencia->inicio;
-        while(aux->proximo != NULL) {
-            addNaFila(minha_fila, aux->valor);
-            aux = aux->proximo;
+        aux = vertices[atual].lista_adjacencia->inicio; //pegar o primeiro valor da lista de adjacência do atual
+        while(aux->proximo != NULL) { //andar na lita de adjacências do atual
+            if (vertices[aux->valor].visitado == 0) {
+                addNaFila(minha_fila, aux->valor); //bota na fila
+                vertices[aux->proximo->valor].distancia_raiz = vertices[atual].distancia_raiz + 1; //seta a distância
+                aux = aux->proximo; //anda pro próximo
+            }
+            
         }
     }
-
+    return vertices[qtd_vertices].distancia_raiz;
 }
 
 int main() {
 
+    int qtd_cenarios;
+    int qtd_vertices;
+    int qtd_arestas;
+    
+    scanf("%d", &qtd_cenarios);
+    
+    for(int cenario = 1; cenario <= qtd_cenarios; cenario++) {
+        scanf("%d %d", &qtd_vertices, &qtd_arestas);
+        vertice *vertices = (vertice*)calloc(qtd_vertices + 1, sizeof(vertice));
+
+        int a, b;
+        //pegar arestas e colocar os vertices delas no grafo 
+        for (int j = 0; j < qtd_arestas; j++) {
+            scanf("%d %d", &a, &b);
+            push(&vertices[a], b);
+            push(&vertices[b], a);
+        }
+
+        printf("\nOutput: %d", bfs(vertices, 1, qtd_vertices));
+        
+        free(vertices);
+    }
+    
     return 0;
 }

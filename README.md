@@ -178,6 +178,34 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 15. Aqui as coisas vão mudar. Encontramos que o vértice **2** já foi visitado no nosso grafo, então devemos seguir para o próximo vértice da lista de adjacências de **4**... porém não tem mais elementos nessa lista. Pela imagem, sabemos que **4** só tem uma aresta, ou seja, ele só se liga ao **2**. Como terminamos de mapear a lista de **4**, retiramos esse vértice da pilha de adjacência.
 ![](./imagens/img_26.png)
 
+16. Então, agora devemos voltar para a lista do vértice **2**, pois é ele quem está na pilha de recursividade. O próximo elemento a ser visitado dessa lista é o **5**.
+![](./imagens/img_27.png)
+
+17. É feito o mesmo processo para o vértice **5**: colocamos na pilha de recursividade, verificamos se foi visitado (se não foi, atualizamos para visitado). E logo depois vamos percorrer a lista de adjacências dele.
+![](./imagens/img_28.png)
+
+18. Quem está na lista do **5** é o vértice **2**, porém ele já foi visitado. Depois dele, não há mais vértices na lista.
+![](./imagens/img_29.png)
+
+19. De volta para a lista de adjacências do **2**, não há mais vértices após o **5**. Assim, devemos retirá-lo da pilha de recursividade. Nesse momento, também acabamos de percorrer a lista de adjacências do vértice **2**. O processo então é o que já conhecemos: retirá-lo da pilha de recursividade e verificar qual número está nele: é o vértice **1**.
+![](./imagens/img_30.png)
+
+20. Ao voltar para o vértice **1**, vamos perceber que o **2** já foi visitado, indicando que o próximo deve ser colocado na pilha de recursividade e visitado. Esse é o vértice **3**. O processo se repete, de forma que o **3** seja visitado e todos os vértices em sua lista (**6** e **7**) também.
+![](./imagens/img_31.png)
+
+É assim que funciona a lógica do **dfs** que iremos utilizar para percorrer os grafos.
+
+## Prova P1 - questões e conteúdos
+- [Firescape problem](https://www.codechef.com/problems/FIRESC)
+- [Problema de contagem de componentes conectados](https://www.hackerearth.com/pt-br/problem/algorithm/connected-components-in-a-graph/)
+- [Vida de inseto](https://www.spoj.com/problems/BUGLIFE/)
+- [Problema do monge e as ilhas](https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/monk-and-the-islands/)
+- Grafos e árvores
+- BFS, DFS e SSSP (Single Source Short Path - Menor Caminho Único)
+- Vertificação de ciclos e detecção de back edge
+- Contagem de componentes
+- Grafo bipartido
+- Diâmetro de um grafo
 
 ## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
