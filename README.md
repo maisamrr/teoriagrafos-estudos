@@ -195,9 +195,12 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 
 É assim que funciona a lógica do **dfs** que iremos utilizar para percorrer os grafos.
 
+## BFS - Breadth First Search (Busca em largura)
+O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
+
 ## Prova P1 - questões e conteúdos
 - [Firescape problem](https://www.codechef.com/problems/FIRESC)
-- [Problema de contagem de componentes conectados](https://www.hackerearth.com/pt-br/problem/algorithm/connected-components-in-a-graph/)
+- [Problema de detectar se é árvore](https://www.spoj.com/problems/PT07Y/)
 - [Vida de inseto](https://www.spoj.com/problems/BUGLIFE/)
 - [Problema do monge e as ilhas](https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/monk-and-the-islands/)
 - Grafos e árvores
@@ -206,10 +209,13 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 - Contagem de componentes
 - Grafo bipartido
 - Diâmetro de um grafo
+- Como vai ser a prova: 2 exercícios de codar (2,5 pts cada) e 6 questões de marcar (0,5 pts cada). 
 
 ## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
 
 [Busca em profundidade - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html)
+
+[Busca em largura - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html)
 
 [Imagem usada para ilustrar pré-ordem](https://pythonhelp.wordpress.com/2015/01/19/arvore-binaria-de-busca-em-python/)
