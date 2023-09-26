@@ -24,6 +24,13 @@ typedef struct fila {
     struct registro *ultimo;
 } fila;
 
+fila *iniciarFila() {
+    fila *nova_fila;
+    nova_fila = (fila*)calloc(1, sizeof(fila));
+
+    return nova_fila;
+}
+
 registro *iniciarRegistro() {
     registro *novo_registro;
     novo_registro = (registro*)calloc(1, sizeof(registro));
@@ -38,37 +45,28 @@ lista *iniciarLista() {
     return nova_lista;
 }
 
-fila *iniciarFila() {
-    fila *nova_fila;
-    nova_fila = (fila*)calloc(1, sizeof(fila));
+int addNaLista(lista *l, int x) {
+    registro *novoRegistro;
+    novoRegistro = iniciarRegistro();
+    novoRegistro->valor = x;
 
-    return nova_fila;
-}
-
-void addNaLista(lista *lista, int a) {
-    registro *novo_registro = iniciarRegistro();
-    novo_registro->valor = a;
-    registro *aux;
-
-    if(lista->inicio == NULL) {
-        lista->inicio = novo_registro;
-        lista->quantidade_elementos++;
-        return;
+    if (l->inicio == NULL)
+    {
+        l->inicio = novoRegistro;
+        l->quantidade_elementos++;
+        return 0;
     }
 
-    aux = lista->inicio;
-    while(aux->proximo != NULL) {
+    registro *aux = l->inicio;
+
+    while (aux->proximo != NULL)
+    {
         aux = aux->proximo;
     }
-    aux->proximo = novo_registro;
-    lista->quantidade_elementos++;
-}
 
-void push(vertice *vertice, int a) {
-    if(vertice->lista_adjacencia == NULL) {
-        vertice->lista_adjacencia = iniciarLista();
-    }
-    addNaLista(vertice->lista_adjacencia, a);
+    aux->proximo = novoRegistro;
+    l->quantidade_elementos++;
+    return 1;
 }
 
 void addNaFila(fila *fila, int a) {
@@ -84,19 +82,26 @@ void addNaFila(fila *fila, int a) {
 
     fila->ultimo->proximo = novo_registro;
     fila->ultimo = novo_registro;
+    fila->tamanho++;
 }
 
 int removerDaFila(fila *fila) {
     if(fila->primeiro == NULL) {
         return -1;
     }
-    registro *aux;
-    int removido = fila->primeiro->valor;
-    aux = fila->primeiro->proximo;
-    fila->primeiro = aux;
+    int removido;
+    removido = fila->primeiro->valor;
+    fila->primeiro = fila->primeiro->proximo;
     fila->tamanho--;
 
     return removido;
+}
+
+void push(vertice *vertice, int a) {
+    if(vertice->lista_adjacencia == NULL) {
+        vertice->lista_adjacencia = iniciarLista();
+    }
+    addNaLista(vertice->lista_adjacencia, a);
 }
 
 int bfs (vertice *vertices, int raiz, int qtd_vertices) {
@@ -104,22 +109,23 @@ int bfs (vertice *vertices, int raiz, int qtd_vertices) {
     int atual;
     registro *aux;
 
-    for(int i =0; i < qtd_vertices; i++) {
-        vertices[i].visitado = 0;
-        vertices[i].distancia_raiz = -1;
+    for(int i = 0; i < qtd_vertices; i++) {
+        vertices[i].visitado = 0; //nenhum vertice visitado ainda
+        vertices[i].distancia_raiz = -1; //podemos inicializar com qualquer valor
     }
 
     addNaFila(minha_fila, raiz);
     vertices[raiz].visitado = 1;
-    vertices[raiz].distancia_raiz = 0;
+    vertices[raiz].distancia_raiz = 0; //distancia da raiz para ela mesma
 
     while(minha_fila->tamanho > 0) {
-        atual = removerDaFila(minha_fila);
-        aux = vertices[atual].lista_adjacencia->inicio;
+        atual = removerDaFila(minha_fila); //tira o primeiro da fila
+        aux = vertices[atual].lista_adjacencia->inicio; //pegar o primeiro valor da lista de adjacência do atual
 
-        while(aux != NULL) {
+        //colocar todos os elementos da lista de adjacência do atual na fila    
+        while(aux != NULL) { //andar na lista de adjacências do atual
             if(vertices[aux->valor].visitado == 0) {
-                vertices[aux->valor].visitado = 1;
+                vertices[aux->valor].visitado = 1; //setar o atual como visitada
                 addNaFila(minha_fila, aux->valor);
                 vertices[aux->valor].distancia_raiz = vertices[atual].distancia_raiz + 1;
             }
@@ -143,13 +149,12 @@ int main() {
         vertice *vertices = (vertice*)calloc(qtd_vertices + 1, sizeof(vertice));
 
         int a, b;
-        //pegar arestas e colocar os vertices delas no grafo 
         for (int j = 0; j < qtd_arestas; j++) {
             scanf("%d %d", &a, &b);
             push(&vertices[a], b);
             push(&vertices[b], a);
         }
-
+        printf("\n");
         printf("%d\n", bfs(vertices, 1, qtd_vertices));
         
         free(vertices);
