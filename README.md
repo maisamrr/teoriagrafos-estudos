@@ -16,11 +16,6 @@ Existem duas formas: matriz de adjacência (listar no formato de linha coluna to
 ## Lista de adjacências
 A lista de adjacência é implementada usando uma lista encadeada, onde cada nó da lista (registro) representa um vértice adjacente. Isso permite uma representação eficiente de grafos, especialmente quando se trata de grafos esparsos, onde nem todos os vértices estão conectados entre si.
 
-## Classificação
-Existe uma classificação de grafos que separa grafos direcionais e grafos não-direcionais:
-- Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando)
-- Grafos direcionais: as arestas possuem direção
-
 ## Estruturas do código
 Utiliza-se aqui três estruturas para compor o grafo, conforme o código abaixo.
 
@@ -208,11 +203,11 @@ No grafo abaixo, os vértices 1, 2 e 3 estão conectados. Assim como 4 e 5. Por�
 a. Componentes fortemente conectados: leva em consideração a seta direcionada. Na imagem abaixo há 1 componente fortemente conectado.
 b. Componentes fracamente conectados: não leva em consideração a direção (como se a seta não existisse), leva em consideração só que existe a aresta. Na imagem abaixo há 2 componentes fortemente conectados.
 ![](./imagens/img_33.png)
-
-## Grafos direcionais e não-direcionais
-Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando).
-Grafos direcionais: as arestas possuem direção.
-
+Como contar quantos componentes conectados há num grafo? Devemos percorrer o vetor de visitados e, pra toda vez que não tiver sido visitado, você vai fazer uma chamada dfs e pra toda vez que vc fizer uma chamada dfs você vai add 1 para a quantidade de componentes conectados → ou seja, a quantidade de raízes que você vai precisar pra percorrer o grafo. O [problema resolvido do firescape](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/firescape) aborda a contagem de componentes.
+## Classificação
+Existe uma classificação de grafos que separa grafos direcionais e grafos não-direcionais:
+- Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando)
+- Grafos direcionais: as arestas possuem direção
 ## BFS - Breadth First Search (Busca em largura)
 O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
 
