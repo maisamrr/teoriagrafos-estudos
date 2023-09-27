@@ -2,7 +2,13 @@ Esse repositório guarda meu material de estudo para a disciplina de Teoria dos 
 
 # Grafos
 Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o segundo conjunto são pares de vértices (arestas) que pertencem ao primeiro conjunto.
-
+G = {V, A}
+V = {1, 2, 4, 6, 5}
+A = {(1, 2), (4, 5), (6, 1)} → Arestas: par de vértices aleatórios e não ordenados
+## Grafos e árvore
+Um grafo é uma árvore quando a quantidade de arestas é a quantidade de vértices menos 1 && não podem existir ciclos.
+- Toda árvore é um grafo? VERDADEIRO.
+- Todo grafo é uma árvore? FALSO.
 ## Formas de representação
 Existem duas formas: matriz de adjacência (listar no formato de linha coluna todos os vértices) e lista de adjacências. É preciso "mapear" o grafo para saber seus vértices e arestas.
 
@@ -194,6 +200,18 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 ![](./imagens/img_31.png)
 
 É assim que funciona a lógica do **dfs** que iremos utilizar para percorrer os grafos.
+
+## Componentes conectados
+O que determina quantos componentes conectados há num grafo? Dois vértices pertencem ao mesmo componente conectado quando consigo conectar do primeiro ao segundo vértice e do segundo ao primeiro. A e B pertencem ao mesmo componente conectado quando consigo ir de A para B e de B para A. Isso independe do caminho, mesmo que tenha que passar por outros vértices.
+No grafo abaixo, os vértices 1, 2 e 3 estão conectados. Assim como 4 e 5. Porém os dois componentes não estão conectados entre si.
+![](./imagens/img_32.png)
+a. Componentes fortemente conectados: leva em consideração a seta direcionada. Na imagem abaixo há 1 componente fortemente conectado.
+b. Componentes fracamente conectados: não leva em consideração a direção (como se a seta não existisse), leva em consideração só que existe a aresta. Na imagem abaixo há 2 componentes fortemente conectados.
+![](./imagens/img_33.png)
+
+## Grafos direcionais e não-direcionais
+Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando).
+Grafos direcionais: as arestas possuem direção.
 
 ## BFS - Breadth First Search (Busca em largura)
 O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
