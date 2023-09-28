@@ -199,9 +199,12 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 O que determina quantos componentes conectados há num grafo? Dois vértices pertencem ao mesmo componente conectado quando consigo conectar do primeiro ao segundo vértice e do segundo ao primeiro. A e B pertencem ao mesmo componente conectado quando consigo ir de A para B e de B para A. Isso independe do caminho, mesmo que tenha que passar por outros vértices.
 No grafo abaixo, os vértices 1, 2 e 3 estão conectados. Assim como 4 e 5. Porém os dois componentes não estão conectados entre si.
 ![](./imagens/img_32.png)
-a. Componentes fortemente conectados: leva em consideração a seta direcionada. Na imagem abaixo há 1 componente fortemente conectado.
-b. Componentes fracamente conectados: não leva em consideração a direção (como se a seta não existisse), leva em consideração só que existe a aresta. Na imagem abaixo há 2 componentes fortemente conectados.
+**a.** Componentes fortemente conectados: leva em consideração a seta direcionada. Na imagem abaixo há 1 componente fortemente conectado.
+
+**b.** Componentes fracamente conectados: não leva em consideração a direção (como se a seta não existisse), leva em consideração só que existe a aresta. Na imagem abaixo há 2 componentes fortemente conectados.
+
 ![](./imagens/img_33.png)
+
 Como contar quantos componentes conectados há num grafo? Devemos percorrer o vetor de visitados e, pra toda vez que não tiver sido visitado, você vai fazer uma chamada dfs e pra toda vez que vc fizer uma chamada dfs você vai add 1 para a quantidade de componentes conectados → ou seja, a quantidade de raízes que você vai precisar pra percorrer o grafo. O [problema de contagem de componentes](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/componentes) e o [problema resolvido do firescape](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/firescape) abordam a contagem de componentes.
 ## Classificação
 Existe uma classificação de grafos que separa grafos direcionais e grafos não-direcionais:
@@ -212,12 +215,14 @@ Existe uma classificação de grafos que separa grafos direcionais e grafos não
 ## Grafos bipartidos
 Nesse tipo de grafo, os vértices vão ser classificados em dois grupos diferentes: as arestas conectam vértices de conjuntos diferentes.
 ![](./imagens/img_35.png)
+
 A lombra aqui é você conseguir ver se é bipartido sem estar pintado. Isso é feito percorrendo o grafo: todo mundo que tá conectado ao vértice tem que ser de outro conjunto. Vamos adicionar um parâmetro a mais, o conjunto a qual pertence e, sempre que percorrer a lista, deve verificar se o vértice é do conjunto oposto. No caso abaixo, os vértices são identificados com 1 ou -1 e devem pertencer a um desses conjuntos. Ao percorrer a lista de adjacências, deve-se conferir qual o conjunto de cada um dos vértices. O [problema dos insetos envolve](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/bugs) grafo bipartido. 
 ![](./imagens/img_36.png)
 
 ## Verificação de ciclos e detecção de back edges
 Um ciclo em um grafo é um caminho fechado. Também pode ser definido como: para dois vértices A e B, há dois caminhos distintos - veja que na imagem abaixo podemos chegar em 3 pelo caminho 1-3 e 1-2-3. Para ele ser detectado, devemos encontrar no processo de busca do dfs um vértice que já tenha sido visitado e não é o vértice pai do vértice em questão.
 ![](./imagens/img_37.png)
+
 Nesse exemplo acima, percorrendo a lista de adjacências do 3, eu encontro o 1. Ele já foi visitado e não é o vértice pai de 3, porque ele veio do 2. É importante ressaltar que quem define o **back edge** é a ordem do dfs. O [problema de detectar se um grafo é uma árvore](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/tree) trata desse assunto. 
 
 ## BFS - Breadth First Search (Busca em largura)
