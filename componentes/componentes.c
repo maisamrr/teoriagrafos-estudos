@@ -48,8 +48,7 @@ void addNaLista(lista *lista, int n) {
 }
 
 void push(vertice *vertice, int a) {
-    if (vertice->lista_adjacencia == NULL)
-    {
+    if (vertice->lista_adjacencia == NULL) {
         vertice->lista_adjacencia = inicializarLista();
     }
     addNaLista(vertice->lista_adjacencia, a);
@@ -92,8 +91,7 @@ int main() {
     }
 
     for (int i = 1; i <= n; i++) {
-        if (!grafo[i].visitado)
-        {
+        if (!grafo[i].visitado) {
             dfs(grafo, i);
             num_grupos++;
         }
