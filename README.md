@@ -18,18 +18,18 @@ Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o seg
 G = {V, A}
 V = {1, 2, 4, 6, 5}
 A = {(1, 2), (4, 5), (6, 1)} → Arestas: par de vértices aleatórios e não ordenados
-## Grafos e árvores {#grafos-e-arvores}
+## Grafos e árvores
 Um grafo é uma árvore quando a quantidade de arestas é a quantidade de vértices menos 1 && não podem existir ciclos.
 - Toda árvore é um grafo? VERDADEIRO.
 - Todo grafo é uma árvore? FALSO.
-## Formas de representação {#formas-de-representacao}
+## Formas de representação
 Existem duas formas: matriz de adjacência (listar no formato de linha coluna todos os vértices) e lista de adjacências. É preciso "mapear" o grafo para saber seus vértices e arestas.
 
 **OBS**: Não é pq um vértice não está conectado a outro vértice que ele não pertence ao grafo. Se faz parte do conjunto, faz parte do grafo.
-## Lista de adjacências {#lista-de-adjacencias}
+## Lista de adjacências
 A lista de adjacência é implementada usando uma lista encadeada, onde cada nó da lista (registro) representa um vértice adjacente. Isso permite uma representação eficiente de grafos, especialmente quando se trata de grafos esparsos, onde nem todos os vértices estão conectados entre si.
 
-## Estruturas do código {#estruturas-do-codigo}
+## Estruturas do código
 Utiliza-se aqui três estruturas para compor o grafo, conforme o código abaixo.
 
 ```c
@@ -60,7 +60,6 @@ Para entender melhor como funciona, vamos seguir os seguintes passos:
 2. Inicializamos o campo visitado dos vértices (esse campo será utilizado quando precisarmos fazer buscas no grafo)
 ![Imagem de cada um dos vértices com "A.visitado = 0", para cada um deles. Destaque para lembrar que a estrutura do vértice inclui um inteiro e uma struct de lista. Tudo está com a cor laranja.](./imagens/img_03.png)
 
-
 3. Vamos criar as listas de adjacências para os vértices
 ![Lista A, Lista B e Lista C são inicializadas na cor verde. Conta com o desenho de um retângulo escrito "registro" dentro e "lista_A.quantidade = 0" ao lado, para cada uma das listas. Destaque para lembrar que a estrutura da lista inclui um inteiro que se refere à quantidade de elementos dela e uma struct de registro que aponta para o início da lista.](./imagens/img_04.png)
 
@@ -85,7 +84,7 @@ agora inclui seu vizinho (2), ou seja, aponta para alguém (2)
 
 É assim que a estrutura de um vértice funciona nesse algoritmo. Dá pra entender que todas essas coisas estão conectadas. A lista não precisa guardar todos os vértices dentro dela porque o próprio vértice já tem em si a informação de pra quem ele vai apontar. Logo, sabendo o início da lista (de qual elemento se trata) e a quantidade de vértices vizinhos, conseguimos ter o controle de, posteriormente, percorrer essa lista de adjacências de um vértice.
 
-## Algumas funções iniciais para desenvolver o grafo {#funcoes-iniciais}
+## Algumas funções iniciais para desenvolver o grafo
 
 Arquivo de referência para ver tudo funcionando: 01_introducao.c
 
@@ -140,7 +139,7 @@ Isso daqui `vertice *vertices = (vertice*)calloc(10000, sizeof(vertice));` é mu
 
 A nossa função `push()` vai fazer todo o trabalho de adicionar uma nova aresta no grafo.
 
-## DFS - Depth First Search (Busca em Profundidade) {#dfs}
+## DFS - Depth First Search (Busca em Profundidade)
 Um algoritmo de busca é qualquer algoritmo que visita todos os vértices de um grafo andando pelas arestas de um vértice a outro. [Cada algoritmo de busca é caracterizado pela ordem em que visita os vértices](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html). Nesse tópico vamos tratar do DFS ou Busca em Profundidade.
 
 O objetivo é visitar todos os vértices de um grafo e conseguir entender a estrutura do grafo com o qual estamos lidando, revelando sua "forma" e reunindo informações (representadas pela numeração dos vértices) que ajudam a responder perguntas sobre o grafo. Você escolhe um caminho e vai nesse caminho até não conseguir mais, descendo pelos nós do grafo, primeiro pela direita. Quando não houver mais nós para visitar, volta pro último lugar onde você tinha uma opção ainda não visitada.
@@ -209,7 +208,7 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 
 É assim que funciona a lógica do **dfs** que iremos utilizar para percorrer os grafos.
 
-## Componentes conectados {#componentes-conectados}
+## Componentes conectados
 O que determina quantos componentes conectados há num grafo? Dois vértices pertencem ao mesmo componente conectado quando consigo conectar do primeiro ao segundo vértice e do segundo ao primeiro. A e B pertencem ao mesmo componente conectado quando consigo ir de A para B e de B para A. Isso independe do caminho, mesmo que tenha que passar por outros vértices.
 No grafo abaixo, os vértices 1, 2 e 3 estão conectados. Assim como 4 e 5. Porém os dois componentes não estão conectados entre si.
 ![](./imagens/img_32.png)
@@ -217,22 +216,22 @@ a. Componentes fortemente conectados: leva em consideração a seta direcionada.
 b. Componentes fracamente conectados: não leva em consideração a direção (como se a seta não existisse), leva em consideração só que existe a aresta. Na imagem abaixo há 2 componentes fortemente conectados.
 ![](./imagens/img_33.png)
 Como contar quantos componentes conectados há num grafo? Devemos percorrer o vetor de visitados e, pra toda vez que não tiver sido visitado, você vai fazer uma chamada dfs e pra toda vez que vc fizer uma chamada dfs você vai add 1 para a quantidade de componentes conectados → ou seja, a quantidade de raízes que você vai precisar pra percorrer o grafo. O [problema de contagem de componentes](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/componentes) e o [problema resolvido do firescape](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/firescape) abordam a contagem de componentes.
-## Classificação {#classificacao}
+## Classificação
 Existe uma classificação de grafos que separa grafos direcionais e grafos não-direcionais:
 - Grafos não-direcionais: as arestas indicam a direção pros dois lados (indo e voltando)
 - Grafos direcionais: as arestas possuem direção
 ![](./imagens/img_34.png)
 
-## Grafos bipartidos {#grafos-bipartidos}
+## Grafos bipartidos
 Nesse tipo de grafo, os vértices vão ser classificados em dois grupos diferentes: as arestas conectam vértices de conjuntos diferentes.
 ![](./imagens/img_35.png)
 A lombra aqui é você conseguir ver se é bipartido sem estar pintado. Isso é feito percorrendo o grafo: todo mundo que tá conectado ao vértice tem que ser de outro conjunto. Vamos adicionar um parâmetro a mais, o conjunto a qual pertence e, sempre que percorrer a lista, deve verificar se o vértice é do conjunto oposto. No caso abaixo, os vértices são identificados com 1 ou -1 e devem pertencer a um desses conjuntos. Ao percorrer a lista de adjacências, deve-se conferir qual o conjunto de cada um dos vértices. O [problema dos insetos envolve](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/bugs) grafo bipartido. 
 ![](./imagens/img_36.png)
 
-## BFS - Breadth First Search (Busca em largura) {#bfs}
+## BFS - Breadth First Search (Busca em largura)
 O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
 
-## Prova P1 - questões e conteúdos {#conteudos-da-p1}
+## Prova P1 - questões e conteúdos
 - [Firescape problem](https://www.codechef.com/problems/FIRESC)
 - [Problema de detectar se é árvore](https://www.spoj.com/problems/PT07Y/)
 - [Vida de inseto](https://www.spoj.com/problems/BUGLIFE/)
@@ -245,7 +244,7 @@ O que difere uma estratégia de busca é a [ordem em que os vértices são visit
 - Diâmetro de um grafo
 - Como vai ser a prova: 2 exercícios de codar (2,5 pts cada) e 6 questões de marcar (0,5 pts cada). 
 
-## Referências {#referencias}
+## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
 
 [Busca em profundidade - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html)
