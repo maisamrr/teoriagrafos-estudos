@@ -1,35 +1,35 @@
 Esse repositório guarda meu material de estudo para a disciplina de Teoria dos grafos - Curso de Ciência da Computação - IESB/Sul - 2023.2.
 
 # Grafos
-1. [Grafos e árvores](#grafosarvores)
-2. [Formas de representação](#representacao)
-3. [Lista de adjacências](#lista)
-4. [Estruturas do código](#estruturas)
-5. [Algumas funções iniciais para desenvolver o grafo](#funcoes)
+1. [Grafos e árvores](#grafos-e-arvores)
+2. [Formas de representação](#formas-de-representacao)
+3. [Lista de adjacências](#lista-de-adjacencias)
+4. [Estruturas do código](#estruturas-do-codigo)
+5. [Algumas funções iniciais para desenvolver o grafo](#funcoes-iniciais)
 6. [DFS - Depth First Search (Busca em Profundidade)](#dfs)
-7. [Componentes conectados](#componentes)
+7. [Componentes conectados](#componentes-conectados)
 8. [Classificação](#classificacao)
-9. [Grafos bipartidos](#bipartidos)
+9. [Grafos bipartidos](#grafos-bipartidos)
 10. [BFS](#bfs)
-11. [Conteúdos da P1](#p1)
-12. [Referências](#refs)
+11. [Conteúdos da P1](#conteudos-da-p1)
+12. [Referências](#referencias)
 
 Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o segundo conjunto são pares de vértices (arestas) que pertencem ao primeiro conjunto.
 G = {V, A}
 V = {1, 2, 4, 6, 5}
 A = {(1, 2), (4, 5), (6, 1)} → Arestas: par de vértices aleatórios e não ordenados
-## Grafos e árvores {#grafosarvores}
+## Grafos e árvores {#grafos-e-arvores}
 Um grafo é uma árvore quando a quantidade de arestas é a quantidade de vértices menos 1 && não podem existir ciclos.
 - Toda árvore é um grafo? VERDADEIRO.
 - Todo grafo é uma árvore? FALSO.
-## Formas de representação {#representacao}
+## Formas de representação {#formas-de-representacao}
 Existem duas formas: matriz de adjacência (listar no formato de linha coluna todos os vértices) e lista de adjacências. É preciso "mapear" o grafo para saber seus vértices e arestas.
 
 **OBS**: Não é pq um vértice não está conectado a outro vértice que ele não pertence ao grafo. Se faz parte do conjunto, faz parte do grafo.
-## Lista de adjacências {#lista}
+## Lista de adjacências {#lista-de-adjacencias}
 A lista de adjacência é implementada usando uma lista encadeada, onde cada nó da lista (registro) representa um vértice adjacente. Isso permite uma representação eficiente de grafos, especialmente quando se trata de grafos esparsos, onde nem todos os vértices estão conectados entre si.
 
-## Estruturas do código {#estruturas}
+## Estruturas do código {#estruturas-do-codigo}
 Utiliza-se aqui três estruturas para compor o grafo, conforme o código abaixo.
 
 ```c
@@ -85,7 +85,7 @@ agora inclui seu vizinho (2), ou seja, aponta para alguém (2)
 
 É assim que a estrutura de um vértice funciona nesse algoritmo. Dá pra entender que todas essas coisas estão conectadas. A lista não precisa guardar todos os vértices dentro dela porque o próprio vértice já tem em si a informação de pra quem ele vai apontar. Logo, sabendo o início da lista (de qual elemento se trata) e a quantidade de vértices vizinhos, conseguimos ter o controle de, posteriormente, percorrer essa lista de adjacências de um vértice.
 
-## Algumas funções iniciais para desenvolver o grafo {#funcoes}
+## Algumas funções iniciais para desenvolver o grafo {#funcoes-iniciais}
 
 Arquivo de referência para ver tudo funcionando: 01_introducao.c
 
@@ -209,7 +209,7 @@ A estratégia para o algoritmo DFS é criar uma pilha de recursividade que vai l
 
 É assim que funciona a lógica do **dfs** que iremos utilizar para percorrer os grafos.
 
-## Componentes conectados {#componentes}
+## Componentes conectados {#componentes-conectados}
 O que determina quantos componentes conectados há num grafo? Dois vértices pertencem ao mesmo componente conectado quando consigo conectar do primeiro ao segundo vértice e do segundo ao primeiro. A e B pertencem ao mesmo componente conectado quando consigo ir de A para B e de B para A. Isso independe do caminho, mesmo que tenha que passar por outros vértices.
 No grafo abaixo, os vértices 1, 2 e 3 estão conectados. Assim como 4 e 5. Porém os dois componentes não estão conectados entre si.
 ![](./imagens/img_32.png)
@@ -223,7 +223,7 @@ Existe uma classificação de grafos que separa grafos direcionais e grafos não
 - Grafos direcionais: as arestas possuem direção
 ![](./imagens/img_34.png)
 
-## Grafos bipartidos {#bipartidos}
+## Grafos bipartidos {#grafos-bipartidos}
 Nesse tipo de grafo, os vértices vão ser classificados em dois grupos diferentes: as arestas conectam vértices de conjuntos diferentes.
 ![](./imagens/img_35.png)
 A lombra aqui é você conseguir ver se é bipartido sem estar pintado. Isso é feito percorrendo o grafo: todo mundo que tá conectado ao vértice tem que ser de outro conjunto. Vamos adicionar um parâmetro a mais, o conjunto a qual pertence e, sempre que percorrer a lista, deve verificar se o vértice é do conjunto oposto. No caso abaixo, os vértices são identificados com 1 ou -1 e devem pertencer a um desses conjuntos. Ao percorrer a lista de adjacências, deve-se conferir qual o conjunto de cada um dos vértices. O [problema dos insetos envolve](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/bugs) grafo bipartido. 
@@ -232,7 +232,7 @@ A lombra aqui é você conseguir ver se é bipartido sem estar pintado. Isso é 
 ## BFS - Breadth First Search (Busca em largura) {#bfs}
 O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
 
-## Prova P1 - questões e conteúdos {#p1}
+## Prova P1 - questões e conteúdos {#conteudos-da-p1}
 - [Firescape problem](https://www.codechef.com/problems/FIRESC)
 - [Problema de detectar se é árvore](https://www.spoj.com/problems/PT07Y/)
 - [Vida de inseto](https://www.spoj.com/problems/BUGLIFE/)
@@ -245,7 +245,7 @@ O que difere uma estratégia de busca é a [ordem em que os vértices são visit
 - Diâmetro de um grafo
 - Como vai ser a prova: 2 exercícios de codar (2,5 pts cada) e 6 questões de marcar (0,5 pts cada). 
 
-## Referências {#refs}
+## Referências {#referencias}
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
 
 [Busca em profundidade - IME-USP](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs.html)
