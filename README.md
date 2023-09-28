@@ -215,6 +215,11 @@ Nesse tipo de grafo, os vértices vão ser classificados em dois grupos diferent
 A lombra aqui é você conseguir ver se é bipartido sem estar pintado. Isso é feito percorrendo o grafo: todo mundo que tá conectado ao vértice tem que ser de outro conjunto. Vamos adicionar um parâmetro a mais, o conjunto a qual pertence e, sempre que percorrer a lista, deve verificar se o vértice é do conjunto oposto. No caso abaixo, os vértices são identificados com 1 ou -1 e devem pertencer a um desses conjuntos. Ao percorrer a lista de adjacências, deve-se conferir qual o conjunto de cada um dos vértices. O [problema dos insetos envolve](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/bugs) grafo bipartido. 
 ![](./imagens/img_36.png)
 
+## Verificação de ciclos e detecção de back edges
+Um ciclo em um grafo é um caminho fechado. Também pode ser definido como: para dois vértices A e B, há dois caminhos distintos - veja que na imagem abaixo podemos chegar em 3 pelo caminho 1-3 e 1-2-3. Para ele ser detectado, devemos encontrar no processo de busca do dfs um vértice que já tenha sido visitado e não é o vértice pai do vértice em questão.
+![](./imagens/img_37.png)
+Nesse exemplo acima, percorrendo a lista de adjacências do 3, eu encontro o 1. Ele já foi visitado e não é o vértice pai de 3, porque ele veio do 2. É importante ressaltar que quem define o **back edge** é a ordem do dfs. O [problema de detectar se um grafo é uma árvore](https://github.com/maisamrr/teoriagrafos-estudos/tree/main/tree) trata desse assunto. 
+
 ## BFS - Breadth First Search (Busca em largura)
 O que difere uma estratégia de busca é a [ordem em que os vértices são visitados](https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/bfs.html). 
 
