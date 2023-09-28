@@ -1,20 +1,6 @@
 Esse repositório guarda meu material de estudo para a disciplina de Teoria dos grafos - Curso de Ciência da Computação - IESB/Sul - 2023.2.
 
 # Grafos
-- [Grafos](#grafos)
-  * [Grafos e árvores](#grafos-e--rvores)
-  * [Formas de representação](#formas-de-representa--o)
-  * [Lista de adjacências](#lista-de-adjac-ncias)
-  * [Estruturas do código](#estruturas-do-c-digo)
-  * [Algumas funções iniciais para desenvolver o grafo](#algumas-fun--es-iniciais-para-desenvolver-o-grafo)
-  * [DFS - Depth First Search (Busca em Profundidade)](#dfs---depth-first-search--busca-em-profundidade-)
-  * [Componentes conectados](#componentes-conectados)
-  * [Classificação](#classifica--o)
-  * [Grafos bipartidos](#grafos-bipartidos)
-  * [BFS - Breadth First Search (Busca em largura)](#bfs---breadth-first-search--busca-em-largura-)
-  * [Prova P1 - questões e conteúdos](https://github.com/maisamrr/teoriagrafos-estudos/tree/main#prova-p1---quest-es-e-conte-dos)
-  * [Referências](#refer-ncias)
-
 Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o segundo conjunto são pares de vértices (arestas) que pertencem ao primeiro conjunto.
 G = {V, A}
 V = {1, 2, 4, 6, 5}
