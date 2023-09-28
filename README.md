@@ -12,7 +12,7 @@ Esse repositório guarda meu material de estudo para a disciplina de Teoria dos 
   * [Classificação](#classifica--o)
   * [Grafos bipartidos](#grafos-bipartidos)
   * [BFS - Breadth First Search (Busca em largura)](#bfs---breadth-first-search--busca-em-largura-)
-  * [Prova P1 - questões e conteúdos](#prova-p1---quest-es-e-conte-dos)
+  * [Prova P1 - questões e conteúdos](https://github.com/maisamrr/teoriagrafos-estudos/tree/main#prova-p1---quest-es-e-conte-dos)
   * [Referências](#refer-ncias)
 
 Grafo é um par de conjuntos onde um primeiro conjunto são de vértices e o segundo conjunto são pares de vértices (arestas) que pertencem ao primeiro conjunto.
