@@ -1,3 +1,4 @@
+//https://www.codechef.com/problems/FIRESC
 #include <stdio.h>
 #include <stdlib.h>
 

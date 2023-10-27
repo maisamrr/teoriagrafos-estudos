@@ -57,26 +57,29 @@ void push(vertice *vertice, int valor) {
     addNaLista(vertice->lista_adjacencia, valor);
 }
 
-int dfs(vertice *vertice, int raiz, int pai) {
-    vertice[raiz].visitado = 1; //visita a raiz
-    registro *aux = vertice[raiz].lista_adjacencia->inicio; //inicializa a lista de adjacências
+void dfs(vertice *vertice, int raiz, int anterior, int *tem_ciclo) {
+    
+    registro *aux = vertice[raiz].lista_adjacencia->inicio;;
+    vertice[raiz].visitado = 1;
 
-    if (vertice[raiz].lista_adjacencia == NULL) {
-        return 0; //se a lista está vazia, não tem ciclo
+    if (vertice[raiz].lista_adjacencia == NULL)
+    {
+        return;
     }
 
-    //ciclo de um grafo: encontrar no processo de busca do dfs um vértice que já tenha sido visitado e não é o vértice pai do vértice em questão
-    while (aux != NULL) { //percorrer o grafo para detectar se há ciclos
-        if (vertice[aux->valor].visitado == 0) {
-            dfs(vertice, aux->valor, raiz);
-        } else if (aux->valor != pai) { 
-            return 1;
+    while (aux != NULL)
+    {
+        if (vertice[aux->valor].visitado == 0)
+        {
+            dfs(vertice, aux->valor, raiz, tem_ciclo);
+        }
+        else if (aux->valor != anterior)
+        {
+            *tem_ciclo = 1;
         }
 
         aux = aux->proximo;
     }
-
-    return 0;
 }
 
 int main() {
@@ -86,38 +89,39 @@ int main() {
     int arestas;
     int u, v; //par de vertices da aresta
     vertice *grafo;
+    int tem_ciclo = 0;
 
     scanf("%d %d", &n, &m); //qtd_vertices e qtd_arestas
-    if(m != n-1) { //para ser árvore, quantidade de arestas é a quantidade de vértices menos 1
-        printf("NO\n");
+
+    if (m != n - 1) {
+        printf("NO");
         return 0;
     }
 
     grafo = (vertice*)calloc(n+1, sizeof(vertice));
-
-    for (int i = 1; i <= n; i++) { //inicializa todos os vértices como não visitados
-        grafo[i].visitado = 0;
-    }
     
-    for(int i = 0; i < m; i++) { //ler arestas
+     for (int i = 0; i < m; i++)
+    {
         scanf("%d %d", &u, &v);
+        grafo[u].visitado = 0;
+        grafo[v].visitado = 0;
         push(&grafo[u], v);
         push(&grafo[v], u);
-    }
+    };
 
-    for (int i = 1; i <= n; i++) { //verifica se tem vértices desconectados no grafo 
+    dfs(grafo, u, -1, &tem_ciclo);
+
+    for (int i = 1; i <= n; i++) {
         if (grafo[i].visitado == 0) {
-            printf("NO\n"); //se tem, não pode ser árvore
+            printf("NO\n");
             return 0;
         }
     }
 
-    int ciclo = dfs(grafo, 1, -1); //dfs verificando se há ciclos
-
-    if (ciclo == 1) {
-        printf("NO\n"); //se tem ciclo não é árvore
+    if (tem_ciclo) {
+        printf("NO");
     } else {
-        printf("YES\n");
+        printf("YES");
     }
 
     return 0;

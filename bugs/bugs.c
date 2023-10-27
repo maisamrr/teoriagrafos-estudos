@@ -85,7 +85,7 @@ int dfs(vertice *v, int no_raiz, int cor) {
 int main() {
 
     int qtd_cenarios; //grafos
-    int qtd_bugs; //vertices
+    int qtd_treasure; //vertices
     int qtd_interacoes; //arestas
     
     printf("Input:\n");
@@ -94,8 +94,8 @@ int main() {
     int *resultados = (int*)calloc(qtd_cenarios + 1, sizeof(int));
     
     for(int cenario = 1; cenario <= qtd_cenarios; cenario++) {
-        scanf("%d %d", &qtd_bugs, &qtd_interacoes);
-        vertice *vertices = (vertice*)calloc(qtd_bugs + 1, sizeof(vertice));
+        scanf("%d %d", &qtd_treasure, &qtd_interacoes);
+        vertice *vertices = (vertice*)calloc(qtd_treasure + 1, sizeof(vertice));
 
         int a, b;
         //pegar arestas e colocar os vertices delas no grafo 
@@ -106,7 +106,7 @@ int main() {
         }
 
         int achou = 0;
-        for(int k = 1; k <= qtd_bugs; k++) {
+        for(int k = 1; k <= qtd_treasure; k++) {
             if(vertices[k].visitado == 0) {
                 if(!dfs(vertices, k, 1)) {
                     achou = 1;
@@ -122,9 +122,9 @@ int main() {
     for (int cenario = 1; cenario <= qtd_cenarios; cenario++) {
         printf("Scenario #%d:\n", cenario);
         if (resultados[cenario] == 1) {
-            printf("Suspicious bugs found!\n");
+            printf("Suspicious treasure found!\n");
         } else {
-            printf("No suspicious bugs found!\n");
+            printf("No suspicious treasure found!\n");
         }
     }
     
