@@ -241,6 +241,25 @@ O que difere uma estratégia de busca é a [ordem em que os vértices são visit
 - Diâmetro de um grafo
 - Como vai ser a prova: 2 exercícios de codar (2,5 pts cada) e 6 questões de marcar (0,5 pts cada). 
 
+## Algoritmo de Dijkstra
+- Peso: é o custo para chegar de um vértice para outro
+- Custo é a variável que mede/qualifica uma aresta
+- Objetivo: dada uma raiz, encontrar o caminho de menor peso entre ele e todos os outros vértices do grafo, incluindo a própria raiz
+
+### Como funciona
+1. Devemos utilizar um vetor de distância como estrutura auxiliar
+![](./imagens/dj_01.png)
+
+2. Deve-se inicializar com o MAIOR valor possível o vetor de distância (pois o objetivo é achar o menor caminho). Vamos preencher tudo com infinito.
+![](./imagens/dj_02.png)
+
+3. Também precisamos de uma estrutura que possa incluir, deletar e buscar - tudo isso com uma complexidade baixa. Para isso, vamos usar a **fila de prioridade baseada em min heap**, que tem complexivade: incluir - O(logN), deletar - O(logN) e buscar O(1). Observação: a estrutura Set (conjunto) também tem essa complexidade e algumas linguagens já tem implementada.
+
+4. Partindo o vértice 3 como raiz, atualizamos a distância:
+![](./imagens/dj_03.png)
+
+5. E devemos incluir também na heap:
+
 ## Referências
 [SOpt](https://github.com/maniero/SOpt/tree/master/C)
 
